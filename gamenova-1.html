@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameNova — Recargas y Gift Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-void:#07070f;
+  --bg-panel:#101020;
+  --bg-panel-2:#161629;
+  --line:#242440;
+  --neon-blue:#00e0ff;
+  --neon-purple:#9b5cff;
+  --gold:#f4b93e;
+  --text:#eceaf7;
+  --text-dim:#9291b3;
+  --danger:#ff5c7a;
+  --ok:#3ee8a0;
+  --radius:16px;
+  --radius-sm:10px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(155,92,255,.18), transparent 60%),
+    radial-gradient(1000px 500px at 90% 0%, rgba(0,224,255,.12), transparent 55%),
+    var(--bg-void);
+  color:var(--text);
+  font-family:'Manrope', sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.brand,.nav-link,.btn,.pill,.stat-num{font-family:'Chakra Petch', sans-serif;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+img{max-width:100%; display:block;}
+::selection{background:var(--neon-purple); color:#fff;}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
+  outline:2px solid var(--neon-blue); outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 22px;}
+
+/* ---------- HEADER ---------- */
+header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(7,7,15,.82); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px;}
+.brand{display:flex; align-items:center; gap:9px; font-size:20px; font-weight:700; letter-spacing:.5px;}
+.brand .dot{
+  width:11px; height:11px; border-radius:3px;
+  background:linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  transform:rotate(45deg); box-shadow:0 0 14px var(--neon-blue);
+}
+nav.main-nav{display:flex; gap:26px; align-items:center;}
+.nav-link{font-size:14px; font-weight:600; color:var(--text-dim); letter-spacing:.4px; transition:color .15s;}
+.nav-link:hover, .nav-link.active{color:var(--text);}
+.nav-link.active{color:var(--neon-blue);}
+.header-actions{display:flex; align-items:center; gap:12px;}
+.icon-btn{
+  width:38px; height:38px; border-radius:10px; border:1px solid var(--line);
+  background:var(--bg-panel); display:flex; align-items:center; justify-content:center;
+  color:var(--text-dim); position:relative; transition:border-color .15s, color .15s;
+}
+.icon-btn:hover{border-color:var(--neon-blue); color:var(--text);}
+.badge{
+  position:absolute; top:-6px; right:-6px; background:var(--gold); color:#1a1305;
+  font-size:10px; font-weight:800; min-width:16px; height:16px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; padding:0 4px;
+}
+.btn{
+  border:none; border-radius:10px; padding:10px 18px; font-weight:700; font-size:13.5px;
+  letter-spacing:.4px; text-transform:uppercase; transition:transform .12s, box-shadow .15s, opacity .15s;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{
+  background:linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); color:#050510;
+  box-shadow:0 4px 22px -4px rgba(155,92,255,.55);
+}
+.btn-primary:hover{box-shadow:0 6px 26px -2px rgba(0,224,255,.55);}
+.btn-ghost{background:transparent; border:1px solid var(--line); color:var(--text);}
+.btn-ghost:hover{border-color:var(--neon-blue);}
+.btn-gold{background:var(--gold); color:#1a1305; box-shadow:0 4px 18px -4px rgba(244,185,62,.6);}
+.btn-block{width:100%;}
+.mobile-toggle{display:none; background:none; border:none; color:var(--text); font-size:22px;}
+
+/* ---------- HERO ---------- */
+.hero{padding:64px 0 40px; position:relative; overflow:hidden;}
+.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--neon-blue);
+  border:1px solid rgba(0,224,255,.35); padding:6px 12px; border-radius:100px;
+  background:rgba(0,224,255,.06); margin-bottom:18px;
+}
+.eyebrow .pulse{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 8px var(--ok); animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{font-size:44px; line-height:1.08; font-weight:700; letter-spacing:.2px;}
+.hero h1 span{
+  background:linear-gradient(120deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero p{color:var(--text-dim); font-size:15.5px; line-height:1.6; margin:18px 0 26px; max-width:480px;}
+.hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+.hero-stats{display:flex; gap:30px; margin-top:38px;}
+.stat-num{font-size:24px; font-weight:700; color:var(--text);}
+.stat-label{font-size:12px; color:var(--text-dim); margin-top:2px;}
+
+.hero-panel{
+  background:linear-gradient(160deg, var(--bg-panel-2), var(--bg-panel));
+  border:1px solid var(--line); border-radius:22px; padding:26px;
+  position:relative; overflow:hidden;
+}
+.hero-panel::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(400px 200px at 100% 0%, rgba(155,92,255,.25), transparent 60%);
+  pointer-events:none;
+}
+.hp-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; position:relative;}
+.hp-title{font-weight:700; font-size:15px;}
+.hp-badge{font-size:11px; color:var(--gold); border:1px solid rgba(244,185,62,.4); padding:3px 9px; border-radius:100px; background:rgba(244,185,62,.08);}
+.hp-pack{
+  display:flex; align-items:center; justify-content:space-between; padding:12px 14px;
+  border:1px solid var(--line); border-radius:12px; margin-bottom:10px; background:rgba(255,255,255,.02);
+  transition:border-color .15s, transform .15s;
+}
+.hp-pack:hover{border-color:var(--neon-blue); transform:translateX(3px);}
+.hp-pack .l{display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:600;}
+.hp-pack .gem{width:20px; height:20px; border-radius:4px; background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple)); transform:rotate(45deg);}
+.hp-pack .price{font-weight:700; color:var(--neon-blue); font-size:13.5px;}
+
+/* ---------- SECTION HEADERS ---------- */
+.section{padding:50px 0;}
+.section-head{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:26px; gap:16px; flex-wrap:wrap;}
+.section-head h2{font-size:26px; font-weight:700;}
+.section-head .sub{color:var(--text-dim); font-size:13.5px; margin-top:4px;}
+.see-all{font-size:13px; font-weight:700; color:var(--neon-blue); letter-spacing:.3px;}
+
+/* ---------- GAME GRID (popular games) ---------- */
+.game-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:16px;}
+.game-card{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px 14px; text-align:center; transition:transform .15s, border-color .15s, box-shadow .15s;
+}
+.game-card:hover{transform:translateY(-4px); border-color:var(--neon-purple); box-shadow:0 10px 30px -12px rgba(155,92,255,.5);}
+.game-icon{
+  width:52px; height:52px; border-radius:14px; margin:0 auto 12px; display:flex; align-items:center;
+  justify-content:center; font-size:22px; font-weight:800;
+}
+.game-card h4{font-size:13.5px; font-weight:700;}
+.game-card .sub{font-size:11px; color:var(--text-dim); margin-top:3px;}
+
+/* ---------- OFFERS ---------- */
+.offer-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.offer-card{
+  position:relative; border-radius:var(--radius); padding:22px; overflow:hidden;
+  border:1px solid var(--line); background:var(--bg-panel);
+}
+.offer-card.gold{border-color:rgba(244,185,62,.4); background:linear-gradient(160deg, rgba(244,185,62,.09), var(--bg-panel));}
+.offer-tag{
+  position:absolute; top:16px; right:-30px; background:var(--gold); color:#1a1305;
+  font-size:10.5px; font-weight:800; padding:4px 34px; transform:rotate(35deg); letter-spacing:.5px;
+}
+.offer-card h3{font-size:17px; margin-bottom:6px;}
+.offer-card p{font-size:13px; color:var(--text-dim); margin-bottom:14px;}
+.offer-price{font-size:22px; font-weight:800; color:var(--neon-blue);}
+.offer-price s{font-size:14px; color:var(--text-dim); font-weight:500; margin-right:8px;}
+
+/* ---------- ADVANTAGES ---------- */
+.adv-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.adv-card{padding:20px; text-align:left;}
+.adv-icon{
+  width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,224,255,.08); border:1px solid rgba(0,224,255,.25); color:var(--neon-blue);
+  font-size:19px; margin-bottom:14px;
+}
+.adv-card h4{font-size:14.5px; margin-bottom:6px;}
+.adv-card p{font-size:12.5px; color:var(--text-dim); line-height:1.5;}
+
+/* ---------- PAYMENT METHODS ---------- */
+.pay-row{display:flex; gap:14px; flex-wrap:wrap;}
+.pay-chip{
+  display:flex; align-items:center; gap:9px; padding:11px 16px; border:1px solid var(--line);
+  border-radius:100px; background:var(--bg-panel); font-size:12.5px; font-weight:600; color:var(--text-dim);
+}
+.pay-chip .sw{width:8px; height:8px; border-radius:50%;}
+
+/* ---------- CATALOG ---------- */
+.catalog-toolbar{display:flex; gap:14px; margin-bottom:24px; flex-wrap:wrap; align-items:center;}
+.search-box{
+  flex:1; min-width:220px; display:flex; align-items:center; gap:10px; background:var(--bg-panel);
+  border:1px solid var(--line); border-radius:12px; padding:11px 16px;
+}
+.search-box input{background:none; border:none; color:var(--text); font-size:14px; width:100%; outline:none; font-family:inherit;}
+.filter-chips{display:flex; gap:9px; flex-wrap:wrap;}
+.f-chip{
+  padding:9px 15px; border-radius:100px; border:1px solid var(--line); background:var(--bg-panel);
+  font-size:12.5px; font-weight:700; color:var(--text-dim); transition:all .15s;
+}
+.f-chip.active, .f-chip:hover{border-color:var(--neon-blue); color:var(--text); box-shadow:0 0 0 1px var(--neon-blue) inset;}
+
+.product-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.product-card{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden; transition:transform .15s, border-color .15s, box-shadow .15s; cursor:pointer;
+  display:flex; flex-direction:column;
+}
+.product-card:hover{transform:translateY(-5px); border-color:var(--neon-blue); box-shadow:0 14px 34px -14px rgba(0,224,255,.45);}
+.pc-top{
+  height:96px; display:flex; align-items:center; justify-content:center; position:relative;
+  font-size:26px; font-weight:800;
+}
+.pc-disc{position:absolute; top:10px; left:10px; background:var(--gold); color:#1a1305; font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px;}
+.pc-body{padding:14px 16px 16px; display:flex; flex-direction:column; gap:10px; flex:1;}
+.pc-game{font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.6px; font-weight:700;}
+.pc-name{font-size:14.5px; font-weight:700;}
+.pc-bottom{display:flex; align-items:center; justify-content:space-between; margin-top:auto;}
+.pc-price{font-size:16px; font-weight:800; color:var(--neon-blue);}
+.pc-price s{font-size:11.5px; color:var(--text-dim); font-weight:500; margin-right:5px;}
+.pc-buy{
+  width:34px; height:34px; border-radius:9px; background:rgba(0,224,255,.1); border:1px solid rgba(0,224,255,.3);
+  color:var(--neon-blue); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800;
+  transition:background .15s;
+}
+.pc-buy:hover{background:var(--neon-blue); color:#050510;}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line); padding:44px 0 26px; margin-top:40px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; margin-bottom:30px;}
+.foot-grid h5{font-size:12.5px; letter-spacing:.5px; text-transform:uppercase; color:var(--text-dim); margin-bottom:14px;}
+.foot-grid a{display:block; font-size:13px; color:var(--text-dim); margin-bottom:9px; transition:color .15s;}
+.foot-grid a:hover{color:var(--neon-blue);}
+.foot-bottom{border-top:1px solid var(--line); padding-top:20px; display:flex; justify-content:space-between; font-size:12px; color:var(--text-dim); flex-wrap:wrap; gap:10px;}
+
+/* ---------- MODAL / DRAWER SHARED ---------- */
+.overlay{
+  position:fixed; inset:0; background:rgba(4,4,10,.7); backdrop-filter:blur(3px);
+  display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+}
+.overlay.show{display:flex;}
+.modal{
+  background:var(--bg-panel-2); border:1px solid var(--line); border-radius:20px; width:100%;
+  max-width:460px; max-height:88vh; overflow-y:auto; padding:26px;
+  animation:modalIn .18s ease;
+}
+@keyframes modalIn{from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;}}
+.modal-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;}
+.modal-head h3{font-size:18px; font-weight:700;}
+.modal-close{background:var(--bg-panel); border:1px solid var(--line); width:32px; height:32px; border-radius:9px; color:var(--text-dim); font-size:15px;}
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:12px; font-weight:700; color:var(--text-dim); margin-bottom:7px; letter-spacing:.3px;}
+.field input, .field select{
+  width:100%; background:var(--bg-panel); border:1px solid var(--line); border-radius:10px; padding:11px 13px;
+  color:var(--text); font-size:14px; font-family:inherit;
+}
+.field input:focus, .field select:focus{border-color:var(--neon-blue); outline:none;}
+.denoms{display:flex; flex-direction:column; gap:9px; margin-bottom:18px;}
+.denom-opt{
+  display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:1px solid var(--line);
+  border-radius:12px; background:var(--bg-panel); transition:border-color .15s;
+}
+.denom-opt.selected{border-color:var(--neon-blue); box-shadow:0 0 0 1px var(--neon-blue) inset;}
+.denom-opt .l{display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:700;}
+.denom-opt .price{font-weight:800; color:var(--neon-blue); font-size:13.5px;}
+.pay-options{display:flex; flex-direction:column; gap:8px; margin-bottom:18px;}
+.pay-opt{
+  display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); border-radius:12px;
+  font-size:13.5px; font-weight:600; background:var(--bg-panel);
+}
+.pay-opt.selected{border-color:var(--neon-purple); box-shadow:0 0 0 1px var(--neon-purple) inset;}
+.order-summary{background:var(--bg-panel); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:18px; font-size:13px;}
+.order-summary .row{display:flex; justify-content:space-between; margin-bottom:8px; color:var(--text-dim);}
+.order-summary .row.total{color:var(--text); font-weight:800; font-size:15px; border-top:1px solid var(--line); padding-top:10px; margin-top:6px;}
+
+/* ---------- ACCOUNT / ADMIN PANELS ---------- */
+.panel-tabs{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
+.panel-tab{padding:9px 16px; border-radius:10px; border:1px solid var(--line); background:var(--bg-panel); font-size:13px; font-weight:700; color:var(--text-dim);}
+.panel-tab.active{color:var(--neon-blue); border-color:var(--neon-blue);}
+.data-card{background:var(--bg-panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;}
+.data-card .id{font-size:11px; color:var(--text-dim); font-weight:700;}
+.data-card .name{font-size:14px; font-weight:700; margin:3px 0;}
+.status-pill{font-size:11px; font-weight:800; padding:4px 10px; border-radius:100px; text-transform:uppercase; letter-spacing:.3px;}
+.status-pill.pendiente{background:rgba(244,185,62,.12); color:var(--gold); border:1px solid rgba(244,185,62,.4);}
+.status-pill.completado{background:rgba(62,232,160,.12); color:var(--ok); border:1px solid rgba(62,232,160,.4);}
+.empty-state{text-align:center; padding:50px 20px; color:var(--text-dim);}
+.empty-state .ic{font-size:34px; margin-bottom:12px;}
+
+.toast{
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0;
+  background:var(--bg-panel-2); border:1px solid var(--ok); color:var(--text); padding:13px 22px;
+  border-radius:12px; font-size:13.5px; font-weight:600; z-index:300; transition:all .25s; pointer-events:none;
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.6);
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.view{display:none;}
+.view.active{display:block;}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr;}
+  .game-grid{grid-template-columns:repeat(3,1fr);}
+  .offer-strip{grid-template-columns:1fr;}
+  .adv-grid{grid-template-columns:repeat(2,1fr);}
+  .product-grid{grid-template-columns:repeat(2,1fr);}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  nav.main-nav{position:fixed; top:68px; left:0; right:0; background:var(--bg-void); border-bottom:1px solid var(--line);
+    flex-direction:column; padding:16px 22px; gap:2px; display:none;}
+  nav.main-nav.open{display:flex;}
+  nav.main-nav .nav-link{width:100%; padding:12px 0; border-bottom:1px solid var(--line);}
+  .mobile-toggle{display:block;}
+  .hero h1{font-size:32px;}
+  .game-grid{grid-template-columns:repeat(2,1fr);}
+  .product-grid{grid-template-columns:1fr 1fr;}
+  .foot-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap header-inner">
+    <div class="brand"><span class="dot"></span> GAMENOVA</div>
+    <nav class="main-nav" id="mainNav">
+      <a class="nav-link" data-view="home">Inicio</a>
+      <a class="nav-link" data-view="catalog">Catálogo</a>
+      <a class="nav-link" data-view="account">Mi cuenta</a>
+      <a class="nav-link" data-view="admin">Admin</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="cartBtn" aria-label="Carrito">🛒<span class="badge" id="cartCount" style="display:none">0</span></button>
+      <button class="btn btn-primary" data-view="account">Entrar</button>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HOME VIEW ================= -->
+<main id="view-home" class="view active">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> ENTREGA AUTOMÁTICA 24/7</div>
+        <h1>Recarga tus juegos <span>al instante</span>, sin vueltas.</h1>
+        <p>Diamantes, UC, Robux y gift cards al mejor precio. Ingresa tu ID, elige tu paquete y listo — tu saldo llega en minutos.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" data-view="catalog">Ver catálogo</button>
+          <button class="btn btn-ghost" data-scroll="ofertas">Ver ofertas</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">+120K</div><div class="stat-label">Recargas entregadas</div></div>
+          <div><div class="stat-num">4.9★</div><div class="stat-label">Valoración media</div></div>
+          <div><div class="stat-num">&lt;5 min</div><div class="stat-label">Tiempo de entrega</div></div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hp-row"><div class="hp-title">🔥 Free Fire</div><div class="hp-badge">Popular</div></div>
+        <div id="heroPacks"></div>
+        <button class="btn btn-primary btn-block" data-view="catalog">Comprar ahora</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><h2>Juegos populares</h2><div class="sub">Elige tu juego y encuentra tu paquete</div></div>
+        <a class="see-all" data-view="catalog">Ver todos →</a>
+      </div>
+      <div class="game-grid" id="gameGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="ofertas">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Ofertas activas</h2><div class="sub">Por tiempo limitado</div></div></div>
+      <div class="offer-strip" id="offerStrip"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>¿Por qué GameNova?</h2></div></div>
+      <div class="adv-grid">
+        <div class="adv-card"><div class="adv-icon">⚡</div><h4>Entrega instantánea</h4><p>La mayoría de pedidos se acreditan en menos de 5 minutos.</p></div>
+        <div class="adv-card"><div class="adv-icon">🔒</div><h4>Pago seguro</h4><p>Pagos en criptomonedas, verificados en cadena.</p></div>
+        <div class="adv-card"><div class="adv-icon">🎧</div><h4>Soporte real</h4><p>Un equipo humano resuelve tu pedido si algo falla.</p></div>
+        <div class="adv-card"><div class="adv-icon">💎</div><h4>Precios claros</h4><p>Sin comisiones ocultas ni sorpresas al pagar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Métodos de pago</h2></div></div>
+      <div class="pay-row">
+        <div class="pay-chip"><span class="sw" style="background:var(--gold)"></span> USDT TRC20</div>
+        <div class="pay-chip"><span class="sw" style="background:var(--gold)"></span> USDT BEP20</div>
+        <div class="pay-chip"><span class="sw" style="background:#f7931a"></span> BTC</div>
+        <div class="pay-chip"><span class="sw" style="background:#627eea"></span> ETH</div>
+        <div class="pay-chip"><span class="sw" style="background:#2775ca"></span> USDC</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= CATALOG VIEW ================= -->
+<main id="view-catalog" class="view">
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Catálogo</h2><div class="sub">Filtra por juego o busca tu paquete</div></div></div>
+      <div class="catalog-toolbar">
+        <div class="search-box">🔍 <input id="searchInput" placeholder="Buscar juego o paquete..."></div>
+      </div>
+      <div class="filter-chips" id="filterChips"></div>
+      <div style="height:22px"></div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ACCOUNT VIEW ================= -->
+<main id="view-account" class="view">
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Mi cuenta</h2><div class="sub">Pedidos, saldo y cupones</div></div></div>
+      <div class="panel-tabs">
+        <button class="panel-tab active" data-tab="pedidos">Pedidos</button>
+        <button class="panel-tab" data-tab="saldo">Saldo</button>
+        <button class="panel-tab" data-tab="cupones">Cupones</button>
+      </div>
+      <div id="accountContent"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ADMIN VIEW ================= -->
+<main id="view-admin" class="view">
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Panel de administrador</h2><div class="sub">Gestión de catálogo y pedidos</div></div></div>
+      <div class="panel-tabs">
+        <button class="panel-tab active" data-atab="paquetes">Paquetes</button>
+        <button class="panel-tab" data-atab="pedidos">Pedidos</button>
+        <button class="panel-tab" data-atab="ajustes">Ajustes de cobro</button>
+      </div>
+      <div id="adminContent"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:12px;">GAMENOVA</div>
+        <p style="color:var(--text-dim); font-size:13px; line-height:1.6; max-width:280px;">Tienda de recargas y gift cards para tus juegos favoritos. Entrega rápida, pagos seguros.</p>
+      </div>
+      <div><h5>Tienda</h5><a data-view="catalog">Catálogo</a><a data-scroll="ofertas">Ofertas</a><a data-view="account">Mi cuenta</a></div>
+      <div><h5>Soporte</h5><a href="#">Centro de ayuda</a><a href="#">Contacto</a><a href="#">Estado del pedido</a></div>
+      <div><h5>Legal</h5><a href="#">Términos</a><a href="#">Privacidad</a><a href="#">Reembolsos</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 GameNova. Todos los derechos reservados.</span>
+      <span>Los nombres de juegos y marcas pertenecen a sus respectivos dueños.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="checkoutTitle">Producto</h3>
+      <button class="modal-close" id="closeCheckout">✕</button>
+    </div>
+    <div class="field"><label>ID del jugador</label><input id="playerIdInput" placeholder="Ej. 123456789"></div>
+    <div class="field"><label>Elige tu paquete</label><div class="denoms" id="denomList"></div></div>
+    <div class="field"><label>Método de pago</label>
+      <div class="pay-options" id="payOptions">
+        <div class="pay-opt" data-pay="USDT TRC20">🟢 USDT (TRC20)</div>
+        <div class="pay-opt" data-pay="USDT BEP20">🟡 USDT (BEP20)</div>
+        <div class="pay-opt" data-pay="BTC">🟠 Bitcoin</div>
+        <div class="pay-opt" data-pay="ETH">🔷 Ethereum</div>
+        <div class="pay-opt" data-pay="USDC">🔵 USDC</div>
+      </div>
+    </div>
+    <div class="field" id="walletBox" style="display:none;">
+      <label>Envía el pago exacto a esta dirección</label>
+      <div style="background:var(--bg-panel); border:1px solid var(--neon-purple); border-radius:10px; padding:12px 14px; font-size:13px; word-break:break-all;" id="walletAddress">—</div>
+      <div style="font-size:11.5px; color:var(--text-dim); margin-top:7px;">Incluye el ID de pedido <b id="walletOrderRef"></b> como referencia. Tu pedido se confirma manualmente al verificar la transacción en la blockchain.</div>
+    </div>
+    <div class="order-summary">
+      <div class="row"><span>Paquete</span><span id="sumPack">—</span></div>
+      <div class="row"><span>Pago</span><span id="sumPay">—</span></div>
+      <div class="row" id="sumFeeRow" style="display:none;"><span id="sumFeeLabel">Comisión de servicio</span><span id="sumFee">$0.00</span></div>
+      <div class="row total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+    </div>
+    <button class="btn btn-primary btn-block" id="confirmOrderBtn">Ya envié el pago</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ DATA ============ */
+// Campo "img": deja la ruta vacía y coloca tú mismo el archivo (ej. "assets/freefire.png")
+// para mostrar la miniatura oficial del juego. Si "img" está vacío se usa un
+// distintivo con degradado + iniciales. No incluyo aquí logos oficiales de los
+// juegos porque son marcas/propiedad de sus editoras (Garena, Riot/Moonton, Roblox
+// Corp, Valve, Sony, Microsoft, Nintendo) y no tengo derecho a reproducirlos por ti.
+const GAMES = [
+  {id:'freefire', name:'Free Fire', short:'FF', grad:'linear-gradient(135deg,#ff6a3d,#ff2e63)', img:''},
+  {id:'pubg', name:'PUBG Mobile', short:'PU', grad:'linear-gradient(135deg,#f2b705,#ff7300)', img:''},
+  {id:'mlbb', name:'Mobile Legends', short:'ML', grad:'linear-gradient(135deg,#3d5afe,#00c2ff)', img:''},
+  {id:'roblox', name:'Roblox', short:'RB', grad:'linear-gradient(135deg,#00e0ff,#9b5cff)', img:''},
+  {id:'steam', name:'Steam', short:'ST', grad:'linear-gradient(135deg,#2b2b52,#1b1b3a)', img:''},
+  {id:'giftcards', name:'PSN / Xbox / Nintendo', short:'GC', grad:'linear-gradient(135deg,#9b5cff,#3d5afe)', img:''},
+];
+
+const DEFAULT_PRODUCTS = [
+  {id:'ff1', game:'freefire', name:'100 Diamantes', price:1.99, oldPrice:null},
+  {id:'ff2', game:'freefire', name:'310 Diamantes', price:4.99, oldPrice:5.99},
+  {id:'ff3', game:'freefire', name:'520 Diamantes', price:7.99, oldPrice:null},
+  {id:'ff4', game:'freefire', name:'1060 Diamantes', price:14.99, oldPrice:16.99},
+  {id:'ff5', game:'freefire', name:'Membresía semanal', price:2.49, oldPrice:null},
+  {id:'pu1', game:'pubg', name:'60 UC', price:1.49, oldPrice:null},
+  {id:'pu2', game:'pubg', name:'325 UC', price:6.99, oldPrice:7.99},
+  {id:'pu3', game:'pubg', name:'660 UC', price:12.99, oldPrice:null},
+  {id:'pu4', game:'pubg', name:'1800 UC', price:29.99, oldPrice:null},
+  {id:'ml1', game:'mlbb', name:'86 Diamonds', price:1.99, oldPrice:null},
+  {id:'ml2', game:'mlbb', name:'344 Diamonds', price:6.99, oldPrice:null},
+  {id:'ml3', game:'mlbb', name:'Weekly Pass', price:1.29, oldPrice:null},
+  {id:'ml4', game:'mlbb', name:'Twilight Pass', price:9.99, oldPrice:11.99},
+  {id:'rb1', game:'roblox', name:'400 Robux', price:4.99, oldPrice:null},
+  {id:'rb2', game:'roblox', name:'800 Robux', price:9.99, oldPrice:null},
+  {id:'rb3', game:'roblox', name:'1700 Robux', price:19.99, oldPrice:22.99},
+  {id:'st1', game:'steam', name:'Gift Card 10 USD', price:10.5, oldPrice:null},
+  {id:'st2', game:'steam', name:'Gift Card 25 USD', price:25.5, oldPrice:null},
+  {id:'gc1', game:'giftcards', name:'PlayStation 10 USD', price:10.5, oldPrice:null},
+  {id:'gc2', game:'giftcards', name:'Xbox 15 USD', price:15.5, oldPrice:null},
+  {id:'gc3', game:'giftcards', name:'Nintendo eShop 20 USD', price:20.5, oldPrice:null},
+];
+
+const gameMap = Object.fromEntries(GAMES.map(g=>[g.id,g]));
+let PRODUCTS = [...DEFAULT_PRODUCTS];
+let currentFilter = 'all';
+let checkoutCtx = { game:null, packId:null, pay:null };
+
+/* ============ STORAGE HELPERS (best-effort, local fallback) ============ */
+// Por defecto esto guarda en localStorage: solo funciona en el navegador/
+// dispositivo donde se usa, no hay un servidor central compartido.
+//
+// PARA GUARDADO REAL EN SERVIDOR (recomendado si el admin necesita ver los
+// pedidos desde cualquier dispositivo), la forma más rápida es Supabase
+// (tiene plan gratuito, es solo una tabla + API, sin backend que programar):
+//
+// 1. Crea cuenta gratis en https://supabase.com y un proyecto nuevo.
+// 2. En el SQL editor del proyecto, crea las tablas:
+//      create table orders (id text primary key, data jsonb, created_at timestamptz default now());
+//      create table settings (id text primary key, data jsonb);
+// 3. En "Project Settings → API" copia tu "Project URL" y tu "anon public key".
+// 4. Agrega este script ANTES de este bloque (en el <head> o justo aquí):
+//      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+// 5. Reemplaza storeGet/storeSet por esta versión (descomenta y completa TU_URL / TU_ANON_KEY):
+//
+//   const supabase = window.supabase.createClient('TU_URL', 'TU_ANON_KEY');
+//   async function storeGet(key, fallback){
+//     const { data, error } = await supabase.from(key==='orders'?'orders':'settings').select('data').eq('id', key).maybeSingle();
+//     if(error || !data) return fallback;
+//     return data.data;
+//   }
+//   async function storeSet(key, value){
+//     const table = key==='orders' ? 'orders' : 'settings';
+//     await supabase.from(table).upsert({ id:key, data:value });
+//   }
+//
+// Con Firebase (Firestore) el patrón es equivalente: una colección "gamenova",
+// un documento por key ("orders", "settings"), y setDoc/getDoc en vez de
+// localStorage.setItem/getItem. Firebase pide un poco más de configuración
+// inicial (registrar app web, copiar firebaseConfig) pero también tiene plan
+// gratuito generoso.
+//
+// Mientras no actives esto, todo funciona igual mediante localStorage:
+async function storeGet(key, fallback){
+  try{
+    const raw = localStorage.getItem('gamenova:' + key);
+    return raw !== null ? JSON.parse(raw) : fallback;
+  }catch(e){ return fallback; }
+}
+async function storeSet(key, value){
+  try{ localStorage.setItem('gamenova:' + key, JSON.stringify(value)); }catch(e){ /* best effort */ }
+}
+
+let ORDERS = [];
+let CART_COUNT = 0;
+let SETTINGS = {
+  wallets: { 'USDT TRC20':'', 'USDT BEP20':'', 'BTC':'', 'ETH':'', 'USDC':'' },
+  feePct: 0,
+  feeLabel: 'Comisión de servicio'
+};
+
+/* ============ RENDER: HOME ============ */
+function renderGameGrid(){
+  const el = document.getElementById('gameGrid');
+  el.innerHTML = GAMES.map(g=>`
+    <div class="game-card" data-open-game="${g.id}">
+      <div class="game-icon" style="background:${g.grad}; overflow:hidden;">${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;">` : g.short}</div>
+      <h4>${g.name}</h4>
+      <div class="sub">Ver paquetes</div>
+    </div>`).join('');
+}
+
+function renderHeroPacks(){
+  const packs = PRODUCTS.filter(p=>p.game==='freefire').slice(0,4);
+  document.getElementById('heroPacks').innerHTML = packs.map(p=>`
+    <div class="hp-pack"><div class="l"><span class="gem"></span>${p.name}</div><div class="price">$${p.price.toFixed(2)}</div></div>
+  `).join('');
+}
+
+function renderOffers(){
+  const offers = PRODUCTS.filter(p=>p.oldPrice).slice(0,3);
+  document.getElementById('offerStrip').innerHTML = offers.map(p=>{
+    const g = gameMap[p.game];
+    const pct = Math.round((1 - p.price/p.oldPrice)*100);
+    return `
+    <div class="offer-card gold">
+      <div class="offer-tag">-${pct}%</div>
+      <h3>${g.name}</h3>
+      <p>${p.name}</p>
+      <div class="offer-price"><s>$${p.oldPrice.toFixed(2)}</s>$${p.price.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ============ RENDER: CATALOG ============ */
+function renderFilterChips(){
+  const el = document.getElementById('filterChips');
+  const chips = [{id:'all', name:'Todos'}, ...GAMES];
+  el.innerHTML = chips.map(g=>`<button class="f-chip ${currentFilter===g.id?'active':''}" data-filter="${g.id}">${g.name}</button>`).join('');
+}
+
+function renderProductGrid(){
+  const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const el = document.getElementById('productGrid');
+  let items = PRODUCTS.filter(p=>{
+    const matchesGame = currentFilter==='all' || p.game===currentFilter;
+    const matchesQuery = !q || p.name.toLowerCase().includes(q) || gameMap[p.game].name.toLowerCase().includes(q);
+    return matchesGame && matchesQuery;
+  });
+  if(items.length===0){
+    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="ic">🔎</div>No encontramos paquetes con ese filtro.</div>`;
+    return;
+  }
+  el.innerHTML = items.map(p=>{
+    const g = gameMap[p.game];
+    const pct = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : null;
+    return `
+    <div class="product-card" data-open-product="${p.id}">
+      <div class="pc-top" style="background:${g.grad}; overflow:hidden;">
+        ${pct?`<div class="pc-disc">-${pct}%</div>`:''}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;">` : g.short}
+      </div>
+      <div class="pc-body">
+        <div class="pc-game">${g.name}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-bottom">
+          <div class="pc-price">${p.oldPrice?`<s>$${p.oldPrice.toFixed(2)}</s>`:''}$${p.price.toFixed(2)}</div>
+          <div class="pc-buy">＋</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ============ CHECKOUT MODAL ============ */
+function openCheckout(gameId, packId){
+  const g = gameMap[gameId];
+  checkoutCtx = { game:gameId, packId: packId || null, pay:null, orderRef: 'GN-' + Date.now().toString(36).toUpperCase() };
+  document.getElementById('checkoutTitle').textContent = g.name;
+  document.getElementById('playerIdInput').value = '';
+  const packs = PRODUCTS.filter(p=>p.game===gameId);
+  document.getElementById('denomList').innerHTML = packs.map(p=>`
+    <div class="denom-opt ${p.id===packId?'selected':''}" data-denom="${p.id}">
+      <div class="l"><span class="gem" style="width:16px;height:16px;border-radius:3px;background:${g.grad};display:inline-block;transform:rotate(45deg)"></span>${p.name}</div>
+      <div class="price">$${p.price.toFixed(2)}</div>
+    </div>`).join('');
+  if(!packId && packs[0]) checkoutCtx.packId = packs[0].id;
+  document.querySelectorAll('.pay-opt').forEach(el=>el.classList.remove('selected'));
+  updateSummary();
+  document.getElementById('checkoutOverlay').classList.add('show');
+}
+function closeCheckout(){ document.getElementById('checkoutOverlay').classList.remove('show'); }
+
+function updateSummary(){
+  const pack = PRODUCTS.find(p=>p.id===checkoutCtx.packId);
+  document.getElementById('sumPack').textContent = pack ? pack.name : '—';
+  document.getElementById('sumPay').textContent = checkoutCtx.pay || '—';
+
+  const fee = pack && SETTINGS.feePct > 0 ? pack.price * (SETTINGS.feePct/100) : 0;
+  const total = pack ? pack.price + fee : 0;
+  const feeRow = document.getElementById('sumFeeRow');
+  if(fee > 0){
+    feeRow.style.display = 'flex';
+    document.getElementById('sumFeeLabel').textContent = `${SETTINGS.feeLabel} (${SETTINGS.feePct}%)`;
+    document.getElementById('sumFee').textContent = `$${fee.toFixed(2)}`;
+  } else {
+    feeRow.style.display = 'none';
+  }
+  document.getElementById('sumTotal').textContent = pack ? `$${total.toFixed(2)}` : '$0.00';
+
+  const walletBox = document.getElementById('walletBox');
+  const wallet = checkoutCtx.pay ? SETTINGS.wallets[checkoutCtx.pay] : '';
+  if(checkoutCtx.pay && wallet){
+    walletBox.style.display = 'block';
+    document.getElementById('walletAddress').textContent = wallet;
+    document.getElementById('walletOrderRef').textContent = checkoutCtx.orderRef;
+  } else if(checkoutCtx.pay && !wallet){
+    walletBox.style.display = 'block';
+    document.getElementById('walletAddress').textContent = 'Falta configurar esta wallet en el panel admin.';
+  } else {
+    walletBox.style.display = 'none';
+  }
+
+  document.querySelectorAll('.denom-opt').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.denom===checkoutCtx.packId);
+  });
+}
+
+async function confirmOrder(){
+  const playerId = document.getElementById('playerIdInput').value.trim();
+  const pack = PRODUCTS.find(p=>p.id===checkoutCtx.packId);
+  if(!playerId){ showToast('Ingresa el ID del jugador'); return; }
+  if(!pack){ showToast('Selecciona un paquete'); return; }
+  if(!checkoutCtx.pay){ showToast('Selecciona un método de pago'); return; }
+
+  const fee = SETTINGS.feePct > 0 ? pack.price * (SETTINGS.feePct/100) : 0;
+  const total = pack.price + fee;
+
+  const order = {
+    id: checkoutCtx.orderRef,
+    game: gameMap[pack.game].name,
+    pack: pack.name,
+    price: pack.price,
+    fee: fee,
+    total: total,
+    playerId,
+    pay: checkoutCtx.pay,
+    wallet: SETTINGS.wallets[checkoutCtx.pay] || '',
+    status: 'pendiente',
+    date: new Date().toISOString()
+  };
+  ORDERS.unshift(order);
+  await storeSet('orders', ORDERS);
+  CART_COUNT++;
+  updateCartBadge();
+  closeCheckout();
+  showToast(`Pedido ${order.id} registrado — confírmalo manualmente al recibir el pago en tu wallet.`);
+  renderAccount();
+}
+
+function updateCartBadge(){
+  const b = document.getElementById('cartCount');
+  if(CART_COUNT>0){ b.style.display='flex'; b.textContent = CART_COUNT; } else { b.style.display='none'; }
+}
+
+/* ============ TOAST ============ */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+/* ============ ACCOUNT VIEW ============ */
+let accountTab = 'pedidos';
+function renderAccount(){
+  const el = document.getElementById('accountContent');
+  if(accountTab==='pedidos'){
+    el.innerHTML = ORDERS.length ? ORDERS.map(o=>`
+      <div class="data-card">
+        <div>
+          <div class="id">${o.id} · ${new Date(o.date).toLocaleString()}</div>
+          <div class="name">${o.game} — ${o.pack}</div>
+          <div class="id">ID jugador: ${o.playerId} · ${o.pay}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="font-weight:800;color:var(--neon-blue)">$${(o.total||o.price).toFixed(2)}</div>
+          <span class="status-pill ${o.status}">${o.status}</span>
+        </div>
+      </div>`).join('') : `<div class="empty-state"><div class="ic">📦</div>Todavía no tienes pedidos.<br><br><button class="btn btn-primary" data-view="catalog">Ir al catálogo</button></div>`;
+  } else if(accountTab==='saldo'){
+    el.innerHTML = `<div class="data-card"><div><div class="id">SALDO DISPONIBLE</div><div class="name" style="font-size:24px;">$0.00</div></div><button class="btn btn-gold">Recargar saldo</button></div>`;
+  } else {
+    el.innerHTML = `<div class="empty-state"><div class="ic">🎟️</div>No tienes cupones activos por el momento.</div>`;
+  }
+}
+
+/* ============ ADMIN VIEW ============ */
+let adminTab = 'paquetes';
+function renderAdmin(){
+  const el = document.getElementById('adminContent');
+  if(adminTab==='paquetes'){
+    el.innerHTML = `
+      <div class="data-card" style="background:transparent;border-style:dashed;">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1;">
+          <input id="newPackName" placeholder="Nombre del paquete" style="flex:1;min-width:160px;background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font-family:inherit;">
+          <select id="newPackGame" style="background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font-family:inherit;">
+            ${GAMES.map(g=>`<option value="${g.id}">${g.name}</option>`).join('')}
+          </select>
+          <input id="newPackPrice" type="number" step="0.01" placeholder="Precio USD" style="width:110px;background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);font-family:inherit;">
+        </div>
+        <button class="btn btn-primary" id="addPackBtn">Añadir</button>
+      </div>
+    ` + PRODUCTS.map(p=>{
+      const g = gameMap[p.game];
+      return `<div class="data-card">
+        <div><div class="id">${g.name}</div><div class="name">${p.name}</div></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <input type="number" step="0.01" value="${p.price}" data-price-for="${p.id}" style="width:90px;background:var(--bg-panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px;color:var(--text);font-family:inherit;">
+          <button class="btn btn-ghost" data-delete-pack="${p.id}">Eliminar</button>
+        </div>
+      </div>`;
+    }).join('');
+  } else if(adminTab==='pedidos'){
+    el.innerHTML = ORDERS.length ? ORDERS.map(o=>`
+      <div class="data-card">
+        <div><div class="id">${o.id}</div><div class="name">${o.game} — ${o.pack}</div><div class="id">ID: ${o.playerId} · Total: $${(o.total||o.price).toFixed(2)} (${o.pay})</div></div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <select data-order-status="${o.id}" style="background:var(--bg-panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px;color:var(--text);font-family:inherit;">
+            <option value="pendiente" ${o.status==='pendiente'?'selected':''}>Pendiente</option>
+            <option value="completado" ${o.status==='completado'?'selected':''}>Completado</option>
+          </select>
+        </div>
+      </div>`).join('') : `<div class="empty-state"><div class="ic">🗂️</div>No hay pedidos todavía.</div>`;
+  } else {
+    const w = SETTINGS.wallets;
+    el.innerHTML = `
+      <div class="data-card" style="flex-direction:column;align-items:stretch;gap:14px;">
+        <div>
+          <div class="id" style="margin-bottom:10px;">TUS DIRECCIONES DE COBRO</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:14px;">Aquí van tus propias wallets. El cliente ve esta dirección al pagar y tú confirmas el pedido manualmente al verificar la transacción en la blockchain (o con el explorador de la red correspondiente).</div>
+        </div>
+        ${['USDT TRC20','USDT BEP20','BTC','ETH','USDC'].map(k=>`
+          <div class="field" style="margin-bottom:0;">
+            <label>${k}</label>
+            <input data-wallet-for="${k}" value="${w[k]||''}" placeholder="Tu dirección de ${k}">
+          </div>`).join('')}
+      </div>
+      <div class="data-card" style="flex-direction:column;align-items:stretch;gap:14px;">
+        <div class="id">COMISIÓN DE SERVICIO (VISIBLE PARA EL CLIENTE)</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="field" style="margin-bottom:0;flex:1;min-width:140px;">
+            <label>Etiqueta</label>
+            <input id="feeLabelInput" value="${SETTINGS.feeLabel}">
+          </div>
+          <div class="field" style="margin-bottom:0;width:120px;">
+            <label>Porcentaje %</label>
+            <input id="feePctInput" type="number" step="0.1" value="${SETTINGS.feePct}">
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim);">Este porcentaje se suma al precio y se muestra siempre en el resumen del pedido antes de pagar — no es un cobro escondido.</div>
+      </div>
+      <button class="btn btn-primary" id="saveSettingsBtn">Guardar ajustes</button>
+    `;
+  }
+}
+
+/* ============ VIEW SWITCHING ============ */
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.toggle('active', l.dataset.view===name));
+  document.getElementById('mainNav').classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(name==='account') renderAccount();
+  if(name==='admin') renderAdmin();
+}
+
+/* ============ EVENTS ============ */
+document.addEventListener('click', (e)=>{
+  const viewBtn = e.target.closest('[data-view]');
+  if(viewBtn){ showView(viewBtn.dataset.view); return; }
+
+  const scrollBtn = e.target.closest('[data-scroll]');
+  if(scrollBtn){ showView('home'); setTimeout(()=>document.getElementById(scrollBtn.dataset.scroll).scrollIntoView({behavior:'smooth'}),50); return; }
+
+  const gameCard = e.target.closest('[data-open-game]');
+  if(gameCard){ openCheckout(gameCard.dataset.openGame); return; }
+
+  const prodCard = e.target.closest('[data-open-product]');
+  if(prodCard){
+    const p = PRODUCTS.find(x=>x.id===prodCard.dataset.openProduct);
+    if(p) openCheckout(p.game, p.id);
+    return;
+  }
+
+  const filterChip = e.target.closest('[data-filter]');
+  if(filterChip){ currentFilter = filterChip.dataset.filter; renderFilterChips(); renderProductGrid(); return; }
+
+  const denomOpt = e.target.closest('[data-denom]');
+  if(denomOpt){ checkoutCtx.packId = denomOpt.dataset.denom; updateSummary(); return; }
+
+  const payOpt = e.target.closest('.pay-opt');
+  if(payOpt){
+    document.querySelectorAll('.pay-opt').forEach(el=>el.classList.remove('selected'));
+    payOpt.classList.add('selected');
+    checkoutCtx.pay = payOpt.dataset.pay;
+    updateSummary();
+    return;
+  }
+
+  const accTab = e.target.closest('[data-tab]');
+  if(accTab){
+    accountTab = accTab.dataset.tab;
+    document.querySelectorAll('#view-account .panel-tab').forEach(t=>t.classList.toggle('active', t===accTab));
+    renderAccount();
+    return;
+  }
+
+  const admTab = e.target.closest('[data-atab]');
+  if(admTab){
+    adminTab = admTab.dataset.atab;
+    document.querySelectorAll('#view-admin .panel-tab').forEach(t=>t.classList.toggle('active', t===admTab));
+    renderAdmin();
+    return;
+  }
+
+  const delPack = e.target.closest('[data-delete-pack]');
+  if(delPack){
+    PRODUCTS = PRODUCTS.filter(p=>p.id!==delPack.dataset.deletePack);
+    renderAdmin(); renderProductGrid(); renderOffers(); renderHeroPacks();
+    showToast('Paquete eliminado');
+    return;
+  }
+
+  if(e.target.id==='addPackBtn'){
+    const name = document.getElementById('newPackName').value.trim();
+    const game = document.getElementById('newPackGame').value;
+    const price = parseFloat(document.getElementById('newPackPrice').value);
+    if(!name || isNaN(price)){ showToast('Completa nombre y precio'); return; }
+    PRODUCTS.push({id:'p'+Date.now(), game, name, price, oldPrice:null});
+    renderAdmin(); renderProductGrid();
+    showToast('Paquete añadido');
+    return;
+  }
+
+  if(e.target.id==='saveSettingsBtn'){
+    const wallets = {};
+    document.querySelectorAll('[data-wallet-for]').forEach(inp=>{
+      wallets[inp.dataset.walletFor] = inp.value.trim();
+    });
+    SETTINGS.wallets = wallets;
+    SETTINGS.feeLabel = document.getElementById('feeLabelInput').value.trim() || 'Comisión de servicio';
+    SETTINGS.feePct = parseFloat(document.getElementById('feePctInput').value) || 0;
+    storeSet('settings', SETTINGS);
+    showToast('Ajustes de cobro guardados');
+    return;
+  }
+
+  if(e.target.id==='closeCheckout' || e.target.id==='checkoutOverlay'){ closeCheckout(); return; }
+  if(e.target.id==='confirmOrderBtn'){ confirmOrder(); return; }
+  if(e.target.id==='mobileToggle'){ document.getElementById('mainNav').classList.toggle('open'); return; }
+  if(e.target.id==='cartBtn'){ showView('account'); accountTab='pedidos'; renderAccount(); return; }
+});
+
+document.addEventListener('input', (e)=>{
+  if(e.target.id==='searchInput'){ renderProductGrid(); }
+  if(e.target.dataset.priceFor){
+    const p = PRODUCTS.find(x=>x.id===e.target.dataset.priceFor);
+    if(p){ const v = parseFloat(e.target.value); if(!isNaN(v)) p.price = v; renderProductGrid(); renderOffers(); renderHeroPacks(); }
+  }
+  if(e.target.dataset.orderStatus){
+    const o = ORDERS.find(x=>x.id===e.target.dataset.orderStatus);
+    if(o){ o.status = e.target.value; storeSet('orders', ORDERS); }
+  }
+});
+
+/* ============ INIT ============ */
+async function init(){
+  renderGameGrid();
+  renderHeroPacks();
+  renderOffers();
+  renderFilterChips();
+  renderProductGrid();
+  ORDERS = await storeGet('orders', []);
+  SETTINGS = await storeGet('settings', SETTINGS);
+  renderAccount();
+  renderAdmin();
+}
+init();
+</script>
+</body>
+</html>
